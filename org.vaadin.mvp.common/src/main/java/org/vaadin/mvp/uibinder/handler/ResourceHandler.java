@@ -1,11 +1,10 @@
 package org.vaadin.mvp.uibinder.handler;
 
+import com.vaadin.server.ThemeResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vaadin.mvp.uibinder.UiConstraintException;
 
-import com.vaadin.terminal.Resource;
-import com.vaadin.terminal.ThemeResource;
 
 public class ResourceHandler implements TargetHandler {
 

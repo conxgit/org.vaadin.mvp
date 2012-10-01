@@ -1,10 +1,10 @@
 package com.example.privatebus.manager;
 
+import com.example.mvp.ExampleUI;
 import org.vaadin.mvp.presenter.FactoryPresenter;
 import org.vaadin.mvp.presenter.IPresenterFactory;
 import org.vaadin.mvp.presenter.annotation.Presenter;
 
-import com.example.mvp.ExampleApp;
 import com.example.privatebus.greeting.GreetingEventBus;
 import com.example.privatebus.greeting.GreetingPresenter;
 import com.example.privatebus.manager.view.IManagerView;
@@ -41,7 +41,7 @@ public class ManagerPresenter extends FactoryPresenter<IManagerView, ManagerEven
     // not really the best way to get the presenter factory, an Issue need to be opened as
     // in case of FactoryPresenter the factory aware interface need to be processed before calling
     // the bind event
-    IPresenterFactory thePresenterFactory = ((ExampleApp) application).getPresenterFactory();
+    IPresenterFactory thePresenterFactory = ((ExampleUI) applicationUI).getPresenterFactory();
 
     firstGreetingPresenter = (GreetingPresenter) thePresenterFactory.createPresenter(GreetingPresenter.class);
     managerView.getFirstPresenterContainer().setContent(firstGreetingPresenter.getView());

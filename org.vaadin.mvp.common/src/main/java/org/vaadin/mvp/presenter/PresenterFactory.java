@@ -7,11 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.vaadin.mvp.eventbus.EventBus;
 import org.vaadin.mvp.eventbus.EventBusManager;
 import org.vaadin.mvp.presenter.annotation.Presenter;
-import org.vaadin.mvp.uibinder.UiBinder;
-import org.vaadin.mvp.uibinder.UiBinderException;
-import org.vaadin.mvp.uibinder.event.EventDispatcherBinder;
-
-import com.vaadin.ui.Component;
 
 /**
  * Simple PresenterFactory capable of creating presenters by class.
@@ -44,7 +39,7 @@ public class PresenterFactory extends AbstractPresenterFactory {
     try {
       Class<IPresenter> presenterClass = (Class<IPresenter>) arg;
       IPresenter presenter = presenterClass.newInstance();
-      presenter.setApplication(application);
+      presenter.setApplicationUI(applicationUI);
       presenter.setMessageSource(messageSource);   
       Presenter def = presenterClass.getAnnotation(Presenter.class);
 

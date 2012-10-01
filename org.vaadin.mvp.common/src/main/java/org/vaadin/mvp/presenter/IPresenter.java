@@ -2,10 +2,12 @@ package org.vaadin.mvp.presenter;
 
 import java.util.Locale;
 
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
 import org.vaadin.mvp.eventbus.EventBus;
 import org.vaadin.mvp.uibinder.IUiMessageSource;
 
-import com.vaadin.Application;
 
 /**
  * Interface that all presenters should implement.
@@ -31,11 +33,11 @@ public interface IPresenter<V, E extends EventBus> {
 
   public void bindIfNeeded();
 
-  public void setApplication(Application application);
+  public void setApplicationUI(UI vaadinSession);
 
   public void setMessageSource(IUiMessageSource messageSource);
 
-  public Application getApplication();
+  public UI getApplicationUI();
 
   public IUiMessageSource getMessageSource();
 
@@ -45,5 +47,5 @@ public interface IPresenter<V, E extends EventBus> {
 
   public void showNotification(String caption);
 
-  public void showNotification(String caption, String description, int type);
+  public void showNotification(String caption, String description, Notification.Type type);
 }

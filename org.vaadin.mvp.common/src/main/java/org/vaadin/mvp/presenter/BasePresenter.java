@@ -2,10 +2,11 @@ package org.vaadin.mvp.presenter;
 
 import java.util.Locale;
 
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
 import org.vaadin.mvp.eventbus.EventBus;
 import org.vaadin.mvp.uibinder.IUiMessageSource;
-
-import com.vaadin.Application;
 
 /**
  * Abstract base class for presenters.
@@ -23,7 +24,7 @@ public abstract class BasePresenter<V, E extends EventBus> implements IPresenter
   protected V view = null;
 
   /** Optional reference to the Application and MessageSource */  
-  protected Application application;
+  protected UI applicationUI;
   protected IUiMessageSource messageSource;  
   
   @Override
@@ -60,13 +61,13 @@ public abstract class BasePresenter<V, E extends EventBus> implements IPresenter
   }
 
   @Override
-  public Application getApplication() {
-    return application;
+  public UI getApplicationUI() {
+    return applicationUI;
   }
 
   @Override
-  public void setApplication(Application application) {
-    this.application = application;
+  public void setApplicationUI(UI applicationUI) {
+    this.applicationUI = applicationUI;
   }
   
   @Override
@@ -110,11 +111,15 @@ public abstract class BasePresenter<V, E extends EventBus> implements IPresenter
   
   @Override
   public void showNotification(String caption) {
-    application.getMainWindow().showNotification(caption);
+    this.showNotification(caption,null,null);
   }
   
   @Override
-  public void showNotification(String caption, String description, int type) {
-    application.getMainWindow().showNotification(caption, description, type);
+  public void showNotification(String caption, String description, Notification.Type type) {
+    Notification.Type theType = type!=null?type : Notification.Type.HUMANIZED_MESSAGE;
+    Notification notification = new Notification(caption, description, theType);
+    notification.setHtmlContentAllowed(true);
+
+    notification.show(UI.getCurrent().getPage());
   }  
 }

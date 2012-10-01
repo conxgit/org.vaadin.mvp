@@ -1,5 +1,8 @@
 package com.example.main;
 
+import com.example.mvp.ExampleUI;
+import com.vaadin.server.Sizeable;
+import com.vaadin.ui.*;
 import org.vaadin.mvp.eventbus.EventBus;
 import org.vaadin.mvp.presenter.BasePresenter;
 import org.vaadin.mvp.presenter.IPresenter;
@@ -9,27 +12,22 @@ import org.vaadin.mvp.presenter.annotation.Presenter;
 import com.example.main.view.IMainView;
 import com.example.main.view.MainView;
 import com.example.menu.MenuPresenter;
-import com.example.mvp.ExampleApp;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.SplitPanel;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 
 @Presenter(view = MainView.class)
 public class MainPresenter extends BasePresenter<IMainView, MainEventBus>{
 
-  private ExampleApp application;
+  private ExampleUI application;
   
   private MenuPresenter menuPresenter;
   
   private IPresenter<?, ?extends EventBus> contentPresenter;
   
-  public void onStart(ExampleApp app) {
+  public void onStart(ExampleUI exampleUI) {
     // keep a reference to the application instance
-    this.application = app;
+    this.application = exampleUI;
     
     // set the applications main windows (the view)
-    this.application.setMainWindow((Window) this.view);
+    this.application.setContent((ComponentContainer) this.view);
     
     // load the menu presenter
     IPresenterFactory pf = application.getPresenterFactory();
@@ -45,16 +43,16 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus>{
   }
   
   public void onShowDialog(Window dialog) {
-    this.application.getMainWindow().addWindow(dialog);
+    this.application.addWindow(dialog);
   }
   
   @Override
   public void bind() {
     VerticalLayout mainLayout = this.view.getMainLayout();
-    SplitPanel layoutPanel = this.view.getSplitLayout();
+    HorizontalSplitPanel layoutPanel = this.view.getSplitLayout();
     mainLayout.setExpandRatio(layoutPanel, 1.0f);
-    layoutPanel.setOrientation(SplitPanel.ORIENTATION_HORIZONTAL);
-    layoutPanel.setSplitPosition(150, SplitPanel.UNITS_PIXELS);
+
+    layoutPanel.setSplitPosition(150, Sizeable.Unit.PIXELS);
   }
   
 }

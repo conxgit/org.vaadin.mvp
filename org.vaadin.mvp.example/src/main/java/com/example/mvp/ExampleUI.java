@@ -1,5 +1,6 @@
 package com.example.mvp;
 
+import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import org.vaadin.mvp.eventbus.EventBus;
@@ -11,6 +12,7 @@ import org.vaadin.mvp.presenter.PresenterFactory;
 import com.example.main.MainEventBus;
 import com.example.main.MainPresenter;
 
+@Theme(value = "reindeer")
 public class ExampleUI extends UI {
 
   /** Per application (session) event bus manager */
@@ -24,6 +26,7 @@ public class ExampleUI extends UI {
   @Override
   protected void init(VaadinRequest request) {
     this.presenterFactory = new PresenterFactory(ebm, getLocale());
+    presenterFactory.setApplicationUI(this);
     mainPresenter = this.presenterFactory.createPresenter(MainPresenter.class);
     MainEventBus eventBus = (MainEventBus) mainPresenter.getEventBus();
     eventBus.start(this);

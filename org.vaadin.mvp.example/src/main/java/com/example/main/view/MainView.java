@@ -1,21 +1,22 @@
 package com.example.main.view;
 
+import com.vaadin.ui.*;
 import org.vaadin.mvp.uibinder.IUiBindable;
 import org.vaadin.mvp.uibinder.annotation.UiField;
 
-import com.vaadin.ui.Component;
-import com.vaadin.ui.SplitPanel;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
-
-public class MainView extends Window implements IMainView, IUiBindable {
+public class MainView extends VerticalLayout implements IMainView, IUiBindable {
 
   @UiField
   VerticalLayout mainLayout;
   
   @UiField
-  SplitPanel splitLayout;
-  
+  HorizontalSplitPanel splitLayout;
+
+  public MainView() {
+    this.setHeight("100%");
+    this.setWidth("100%");
+  }
+
   @Override
   public void setMenu(Component menu) {
     splitLayout.setFirstComponent(menu);
@@ -27,7 +28,7 @@ public class MainView extends Window implements IMainView, IUiBindable {
   }
 
   @Override
-  public SplitPanel getSplitLayout() {
+  public HorizontalSplitPanel getSplitLayout() {
     return splitLayout;
   }
   

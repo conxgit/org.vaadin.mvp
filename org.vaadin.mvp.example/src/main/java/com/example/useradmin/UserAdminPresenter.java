@@ -93,8 +93,8 @@ public class UserAdminPresenter extends FactoryPresenter<IUserAdminView, UserAdm
   
   private void closeDialog() {
     // dismiss the dialog
+    this.applicationUI.removeWindow(this.dialog);
     Window applicationWindow = (Window) this.dialog.getParent();
-    applicationWindow.removeWindow(this.dialog);
     this.dialog = null;
     this.userForm = null;
   }

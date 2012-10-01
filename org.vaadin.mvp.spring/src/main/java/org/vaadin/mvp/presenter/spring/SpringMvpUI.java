@@ -1,13 +1,12 @@
 package org.vaadin.mvp.presenter.spring;
 
+import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.UI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.mvp.eventbus.EventBusManager;
 import org.vaadin.mvp.presenter.AbstractPresenterFactory;
 import org.vaadin.mvp.presenter.IPresenterFactory;
 import org.vaadin.mvp.uibinder.IUiMessageSource;
-
-import com.vaadin.Application;
 
 /**
  * Vaadin base application class for spring/mvp based applications.
@@ -25,20 +24,18 @@ public abstract class SpringMvpUI extends UI {
   private EventBusManager eventBusManager = new EventBusManager();
 
   @Override
-  public final void init() {
+  protected void init(VaadinRequest request) {
     preInit();
     presenterFactory.setEventManager(eventBusManager);
-    
-    presenterFactory.setVaadinSession(this);
-    presenterFactory.setMessageSource(messageSource);    
-    
+    presenterFactory.setMessageSource(messageSource);
+    presenterFactory.setApplicationUI(this);
     //    Locale locale = getLocale();
     //    presenterFactory.setLocale(locale);
     postInit();
   }
 
   public abstract void preInit();
-  
+
   public abstract void postInit();
 
   public IPresenterFactory getPresenterFactory() {

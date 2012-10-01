@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Locale;
 
+import com.vaadin.server.Sizeable;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -48,7 +49,7 @@ public class UiBinderTest {
     ComponentContainer content = root.getContent();
     logger.info("content: {}", content);
     float height = layout.getHeight();
-    int heightUnits = layout.getHeightUnits();
+    Sizeable.Unit heightUnits = layout.getHeightUnits();
     logger.info("Height: {} unit: {}", height, heightUnits);
   }
 

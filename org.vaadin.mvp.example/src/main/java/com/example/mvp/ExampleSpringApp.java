@@ -2,13 +2,13 @@ package com.example.mvp;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.vaadin.mvp.presenter.spring.SpringMvpApplication;
 
 import com.example.spring.main.SpringMainPresenter;
+import org.vaadin.mvp.presenter.spring.SpringMvpUI;
 
 @Component("springMvpApp")
 @Scope("prototype")
-public class ExampleSpringApp extends SpringMvpApplication {
+public class ExampleSpringApp extends SpringMvpUI {
 
   private SpringMainPresenter mainPresenter;
 
