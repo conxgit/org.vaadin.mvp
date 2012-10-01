@@ -1,5 +1,6 @@
 package org.vaadin.mvp.presenter.spring;
 
+import com.vaadin.ui.UI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.mvp.eventbus.EventBusManager;
 import org.vaadin.mvp.presenter.AbstractPresenterFactory;
@@ -14,7 +15,7 @@ import com.vaadin.Application;
  * @author tam
  * 
  */
-public abstract class SpringMvpApplication extends Application {
+public abstract class SpringMvpUI extends UI {
 
   @Autowired(required = true)
   protected AbstractPresenterFactory presenterFactory;
@@ -28,7 +29,7 @@ public abstract class SpringMvpApplication extends Application {
     preInit();
     presenterFactory.setEventManager(eventBusManager);
     
-    presenterFactory.setApplication(this);
+    presenterFactory.setVaadinSession(this);
     presenterFactory.setMessageSource(messageSource);    
     
     //    Locale locale = getLocale();

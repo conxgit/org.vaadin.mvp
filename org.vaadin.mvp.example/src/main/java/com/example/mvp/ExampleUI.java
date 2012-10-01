@@ -1,5 +1,7 @@
 package com.example.mvp;
 
+import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.UI;
 import org.vaadin.mvp.eventbus.EventBus;
 import org.vaadin.mvp.eventbus.EventBusManager;
 import org.vaadin.mvp.presenter.IPresenter;
@@ -8,9 +10,8 @@ import org.vaadin.mvp.presenter.PresenterFactory;
 
 import com.example.main.MainEventBus;
 import com.example.main.MainPresenter;
-import com.vaadin.Application;
 
-public class ExampleApp extends Application {
+public class ExampleUI extends UI {
 
   /** Per application (session) event bus manager */
   private EventBusManager ebm = new EventBusManager();
@@ -19,20 +20,15 @@ public class ExampleApp extends Application {
   
   /** Main presenter */
   private IPresenter<?, ? extends EventBus> mainPresenter;
-  
+
   @Override
-  public void init() {
-    // create an instance of a default presenter factory
+  protected void init(VaadinRequest request) {
     this.presenterFactory = new PresenterFactory(ebm, getLocale());
-    this.presenterFactory.setApplication(this);
-    
-    // request an instance of MainPresenter
     mainPresenter = this.presenterFactory.createPresenter(MainPresenter.class);
     MainEventBus eventBus = (MainEventBus) mainPresenter.getEventBus();
     eventBus.start(this);
-    
   }
-  
+
   public IPresenterFactory getPresenterFactory() {
     return this.presenterFactory;
   }
