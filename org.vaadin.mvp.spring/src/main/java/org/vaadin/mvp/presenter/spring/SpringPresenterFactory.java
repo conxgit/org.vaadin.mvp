@@ -49,7 +49,6 @@ public class SpringPresenterFactory extends AbstractPresenterFactory implements 
     String beanName = (String) name;
     if (applicationContext.containsBean(beanName)) {
       IPresenter p = applicationContext.getBean(beanName, IPresenter.class);
-      p.setApplicationUI(applicationUI);
       p.setMessageSource(messageSource);   
       Presenter def = p.getClass().getAnnotation(Presenter.class);
       if (def == null) {

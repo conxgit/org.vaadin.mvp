@@ -26,7 +26,6 @@ public class ExampleUI extends UI {
   @Override
   protected void init(VaadinRequest request) {
     this.presenterFactory = new PresenterFactory(ebm, getLocale());
-    presenterFactory.setApplicationUI(this);
     mainPresenter = this.presenterFactory.createPresenter(MainPresenter.class);
     MainEventBus eventBus = (MainEventBus) mainPresenter.getEventBus();
     eventBus.start(this);

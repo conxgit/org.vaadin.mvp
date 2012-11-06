@@ -2,7 +2,6 @@ package org.vaadin.mvp.presenter;
 
 import java.util.Locale;
 
-import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import org.vaadin.mvp.eventbus.EventBus;
@@ -23,8 +22,7 @@ public abstract class BasePresenter<V, E extends EventBus> implements IPresenter
   protected E eventBus = null;
   protected V view = null;
 
-  /** Optional reference to the Application and MessageSource */  
-  protected UI applicationUI;
+  /** Optional reference to the Application and MessageSource */
   protected IUiMessageSource messageSource;  
   
   @Override
@@ -60,16 +58,6 @@ public abstract class BasePresenter<V, E extends EventBus> implements IPresenter
     }
   }
 
-  @Override
-  public UI getApplicationUI() {
-    return applicationUI;
-  }
-
-  @Override
-  public void setApplicationUI(UI applicationUI) {
-    this.applicationUI = applicationUI;
-  }
-  
   @Override
   public IUiMessageSource getMessageSource() {
     return messageSource;

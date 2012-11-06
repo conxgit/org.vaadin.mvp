@@ -39,7 +39,6 @@ public class PresenterFactory extends AbstractPresenterFactory {
     try {
       Class<IPresenter> presenterClass = (Class<IPresenter>) arg;
       IPresenter presenter = presenterClass.newInstance();
-      presenter.setApplicationUI(applicationUI);
       presenter.setMessageSource(messageSource);   
       Presenter def = presenterClass.getAnnotation(Presenter.class);
 

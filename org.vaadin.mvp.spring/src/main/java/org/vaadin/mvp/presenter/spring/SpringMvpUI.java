@@ -28,7 +28,6 @@ public abstract class SpringMvpUI extends UI {
     preInit();
     presenterFactory.setEventManager(eventBusManager);
     presenterFactory.setMessageSource(messageSource);
-    presenterFactory.setApplicationUI(this);
     //    Locale locale = getLocale();
     //    presenterFactory.setLocale(locale);
     postInit();
