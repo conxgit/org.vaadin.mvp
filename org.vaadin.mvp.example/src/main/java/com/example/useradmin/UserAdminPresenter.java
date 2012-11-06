@@ -1,5 +1,6 @@
 package com.example.useradmin;
 
+import com.vaadin.ui.UI;
 import org.vaadin.mvp.presenter.FactoryPresenter;
 import org.vaadin.mvp.presenter.ViewFactoryException;
 import org.vaadin.mvp.presenter.annotation.Presenter;
@@ -93,7 +94,7 @@ public class UserAdminPresenter extends FactoryPresenter<IUserAdminView, UserAdm
   
   private void closeDialog() {
     // dismiss the dialog
-    this.applicationUI.removeWindow(this.dialog);
+    UI.getCurrent().removeWindow(this.dialog);
     Window applicationWindow = (Window) this.dialog.getParent();
     this.dialog = null;
     this.userForm = null;
