@@ -217,7 +217,7 @@ public class ComponentHandler implements TargetHandler {
     } else {
       if (current instanceof Panel && inner instanceof ComponentContainer) {
         // set content
-        ComponentContainer panelContent = ((Panel) current).getContent();
+        Component panelContent = ((Panel) current).getContent();
         if (panelContent != null) {
           logger.warn("Panel content is already set, content is overwritten with new component");
         }

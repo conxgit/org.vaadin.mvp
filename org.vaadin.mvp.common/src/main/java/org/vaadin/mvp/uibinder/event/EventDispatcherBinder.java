@@ -1,9 +1,5 @@
 package org.vaadin.mvp.uibinder.event;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.vaadin.data.Container;
 import com.vaadin.data.Container.ItemSetChangeEvent;
 import com.vaadin.data.Item;
@@ -19,30 +15,24 @@ import com.vaadin.event.LayoutEvents;
 import com.vaadin.event.LayoutEvents.LayoutClickEvent;
 import com.vaadin.event.MouseEvents;
 import com.vaadin.event.MouseEvents.DoubleClickEvent;
-import com.vaadin.ui.Button;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Component.ErrorEvent;
-import com.vaadin.ui.ComponentContainer;
-import com.vaadin.ui.ComponentContainer.ComponentAttachEvent;
-import com.vaadin.ui.ComponentContainer.ComponentDetachEvent;
-import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.TabSheet.SelectedTabChangeEvent;
-import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnResizeEvent;
 import com.vaadin.ui.Table.FooterClickEvent;
 import com.vaadin.ui.Table.HeaderClickEvent;
-import com.vaadin.ui.Tree;
 import com.vaadin.ui.Tree.CollapseEvent;
 import com.vaadin.ui.Tree.ExpandEvent;
-import com.vaadin.ui.Upload;
 import com.vaadin.ui.Upload.FailedEvent;
 import com.vaadin.ui.Upload.FinishedEvent;
 import com.vaadin.ui.Upload.StartedEvent;
 import com.vaadin.ui.Upload.SucceededEvent;
-import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.Window.ResizeEvent;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Implementation of IEventBinder that implements a listener for almost all events
@@ -74,7 +64,6 @@ public class EventDispatcherBinder implements IEventBinder {
 
   /**
    * 
-   * @param dispatcher
    * @param comp
    * @param eventName
    * @param value
@@ -94,7 +83,7 @@ public class EventDispatcherBinder implements IEventBinder {
   static Map<String, Class<?>> eventMap = new HashMap<String, Class<?>>();
 
   static {
-    eventMap.put("error", Component.ErrorListener.class);
+    eventMap.put("error", Component.Listener.class);
     eventMap.put("componentAttach", ComponentContainer.ComponentAttachListener.class);
     eventMap.put("componentDetach", ComponentContainer.ComponentDetachListener.class);
     eventMap.put("valueChange", Property.ValueChangeListener.class);
@@ -125,7 +114,7 @@ public class EventDispatcherBinder implements IEventBinder {
   }
 
   public class DispatchingListenerImpl implements
-      Component.ErrorListener,
+      Component.Listener,
       ComponentContainer.ComponentAttachListener,
       ComponentContainer.ComponentDetachListener,
       Property.ValueChangeListener,
@@ -278,17 +267,12 @@ public class EventDispatcherBinder implements IEventBinder {
     }
 
     @Override
-    public void componentDetachedFromContainer(ComponentDetachEvent e) {
+    public void componentDetachedFromContainer(HasComponents.ComponentDetachEvent e) {
       dispatcher.dispatch(eventName, e);
     }
 
     @Override
-    public void componentAttachedToContainer(ComponentAttachEvent e) {
-      dispatcher.dispatch(eventName, e);
-    }
-
-    @Override
-    public void componentError(ErrorEvent e) {
+    public void componentAttachedToContainer(HasComponents.ComponentAttachEvent e) {
       dispatcher.dispatch(eventName, e);
     }
 
@@ -302,5 +286,9 @@ public class EventDispatcherBinder implements IEventBinder {
       dispatcher.dispatch(eventName, e);
     }
 
+      @Override
+      public void componentEvent(Component.Event e) {
+          dispatcher.dispatch(eventName, e);
+      }
   }
 }

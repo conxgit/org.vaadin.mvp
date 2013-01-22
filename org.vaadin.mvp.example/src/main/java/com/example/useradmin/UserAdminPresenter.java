@@ -63,7 +63,7 @@ public class UserAdminPresenter extends FactoryPresenter<IUserAdminView, UserAdm
     this.dialog = new Window(view.getCaption());
     view.setCaption(null);
     this.dialog.setModal(true);
-    dialog.addComponent(view);
+    dialog.setContent(view);
     dialog.setWidth("300px");
     this.eventBus.showDialog(this.dialog);
   }
