@@ -104,7 +104,7 @@ public class UiBinderTest {
   /**
    * Test that custom components are bound correctly.
    * 
-   * @see <code>UiBinderCustomCompView.xml</code>
+   * @see UiBinderCustomCompView.xml
    * 
    * @throws Exception
    */
@@ -114,7 +114,7 @@ public class UiBinderTest {
     assertNotNull("custom comp has not been added to the view", view.customComp);
     assertNotNull("custom comp content not added", view.customComp.getContent());
     assertEquals("custom comp content is not a VerticalLayout", VerticalLayout.class, view.customComp.getContent().getClass());
-    assertEquals("custom comp content is not a Label", Label.class, ((ComponentContainer)view.customComp.getContent()).getComponentIterator().next().getClass());
+    assertEquals("custom comp content is not a Label", Label.class, ((ComponentContainer)view.customComp.getContent()).iterator().next().getClass());
     assertNotNull("custom comp field 'label' not bound to UiField", view.customComp.label);
     assertEquals("custom comp field 'label' not translated", "This is the view title", view.customComp.label.getCaption());
   }
