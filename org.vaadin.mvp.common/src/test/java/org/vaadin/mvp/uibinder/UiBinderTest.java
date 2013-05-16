@@ -46,7 +46,7 @@ public class UiBinderTest {
     VerticalLayout layout = new VerticalLayout();
     root.setContent(layout);
     layout.setHeight("67%");
-    ComponentContainer content = root.getContent();
+    Component content = root.getContent();
     logger.info("content: {}", content);
     float height = layout.getHeight();
     Sizeable.Unit heightUnits = layout.getHeightUnits();
@@ -82,7 +82,7 @@ public class UiBinderTest {
   @Test
   public void testBindAttributes() throws Exception {
     UiBinderView root = instance.bind(UiBinderView.class, new Locale("en"), null);
-    ComponentContainer content = root.getContent();
+    Component content = root.getContent();
     assertNotNull("content should be a layout", content);
     VerticalLayout layout = (VerticalLayout) content;
     float height = layout.getHeight();
@@ -104,7 +104,7 @@ public class UiBinderTest {
   /**
    * Test that custom components are bound correctly.
    * 
-   * @see UiBinderCustomCompView.xml
+   * @see <code>UiBinderCustomCompView.xml</code>
    * 
    * @throws Exception
    */
@@ -114,7 +114,7 @@ public class UiBinderTest {
     assertNotNull("custom comp has not been added to the view", view.customComp);
     assertNotNull("custom comp content not added", view.customComp.getContent());
     assertEquals("custom comp content is not a VerticalLayout", VerticalLayout.class, view.customComp.getContent().getClass());
-    assertEquals("custom comp content is not a Label", Label.class, view.customComp.getContent().getComponentIterator().next().getClass());
+    assertEquals("custom comp content is not a Label", Label.class, ((ComponentContainer)view.customComp.getContent()).getComponentIterator().next().getClass());
     assertNotNull("custom comp field 'label' not bound to UiField", view.customComp.label);
     assertEquals("custom comp field 'label' not translated", "This is the view title", view.customComp.label.getCaption());
   }
